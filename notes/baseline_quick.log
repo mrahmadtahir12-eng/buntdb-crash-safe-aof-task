@@ -1,0 +1,218 @@
+== clean tree from <task>/upstream/buntdb
+buntdb.go
+go.mod
+go.sum
+== screen: branching on the test environment (a screen, not proof)
+(nothing found)
+== V11 surface: build the verifier (api_surface.go must compile)
+== V1b: upstream test suite from the pinned commit against the candidate sources
+--- FAIL: TestVariousTx (0.00s)
+    buntdb_test.go:666: expecting not found error
+FAIL
+FAIL	github.com/tidwall/buntdb	19.114s
+FAIL
+== V7 fixtures present?
+== harness, seed 424242
+=== RUN   TestV1_RoundTripAndRollback
+    basic_test.go:47: seed 424242
+--- PASS: TestV1_RoundTripAndRollback (0.41s)
+=== RUN   TestV10_OneFileAndCommitCost
+    basic_test.go:127: 500 small commits: tiny db 2.7516ms, big db 1.6426ms, ratio 0.6
+--- PASS: TestV10_OneFileAndCommitCost (0.03s)
+=== RUN   TestV11_NoNewDependencies
+--- PASS: TestV11_NoNewDependencies (0.00s)
+=== RUN   TestChildMain
+    child_test.go:18: not a child process
+--- SKIP: TestChildMain (0.00s)
+=== RUN   TestV5_LastTransactionAltered
+    corrupt_test.go:17: seed 424242
+    corrupt_test.go:26: last transaction occupies bytes 81095..81289
+    corrupt_test.go:39: byte 81095 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81095 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81095 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81096 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81096 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81096 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81097 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81097 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81097 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81098 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81098 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81098 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81099 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81099 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81099 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81100 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81100 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81100 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81101 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81101 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81101 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81102 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81102 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81102 zero: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81103 xor 0xff: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: byte 81103 bit flip: Open must discard the last transaction, got error: invalid database
+    corrupt_test.go:39: stopping after 26 failures
+--- FAIL: TestV5_LastTransactionAltered (0.51s)
+=== RUN   TestV6_EarlierTransactionAltered
+    corrupt_test.go:92: seed 424242
+    corrupt_test.go:107: 11460 offsets x 3 mutations
+    corrupt_test.go:125: byte 17 xor 0xff: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 17 bit flip: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 17 zero: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 18 xor 0xff: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 18 bit flip: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 18 zero: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 19 xor 0xff: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 19 bit flip: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 19 zero: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:125: byte 28 xor 0xff: Open succeeded; corruption in the middle must be reported
+    corrupt_test.go:130: byte 1393 xor 0xff: error is not ErrInvalid: strconv.ParseInt: parsing "\xce826228123": invalid syntax
+    corrupt_test.go:130: byte 1393 zero: error is not ErrInvalid: strconv.ParseInt: parsing "\x00826228123": invalid syntax
+    corrupt_test.go:130: byte 1394 xor 0xff: error is not ErrInvalid: strconv.ParseInt: parsing "1\xc726228123": invalid syntax
+    corrupt_test.go:130: byte 1394 bit flip: error is not ErrInvalid: strconv.ParseInt: parsing "1<26228123": invalid syntax
+    corrupt_test.go:130: byte 1394 zero: error is not ErrInvalid: strconv.ParseInt: parsing "1\x0026228123": invalid syntax
+    corrupt_test.go:130: byte 1395 xor 0xff: error is not ErrInvalid: strconv.ParseInt: parsing "18\xcd6228123": invalid syntax
+    corrupt_test.go:130: byte 1395 bit flip: error is not ErrInvalid: strconv.ParseInt: parsing "18:6228123": invalid syntax
+    corrupt_test.go:130: byte 1395 zero: error is not ErrInvalid: strconv.ParseInt: parsing "18\x006228123": invalid syntax
+    corrupt_test.go:130: byte 1396 xor 0xff: error is not ErrInvalid: strconv.ParseInt: parsing "182\xc9228123": invalid syntax
+    corrupt_test.go:130: byte 1396 bit flip: error is not ErrInvalid: strconv.ParseInt: parsing "182&228123": invalid syntax
+    corrupt_test.go:148: summary: 24596 silent opens, 315 wrong errors, 0 files changed (of 34380 trials)
+--- FAIL: TestV6_EarlierTransactionAltered (702.42s)
+=== RUN   TestV7_OldFilesStillOpen
+=== RUN   TestV7_OldFilesStillOpen/seed101
+=== RUN   TestV7_OldFilesStillOpen/seed102
+=== RUN   TestV7_OldFilesStillOpen/seed103
+=== RUN   TestV7_OldFilesStillOpen/seed104
+=== RUN   TestV7_OldFilesStillOpen/seed105
+--- PASS: TestV7_OldFilesStillOpen (1.83s)
+    --- PASS: TestV7_OldFilesStillOpen/seed101 (0.37s)
+    --- PASS: TestV7_OldFilesStillOpen/seed102 (0.37s)
+    --- PASS: TestV7_OldFilesStillOpen/seed103 (0.37s)
+    --- PASS: TestV7_OldFilesStillOpen/seed104 (0.35s)
+    --- PASS: TestV7_OldFilesStillOpen/seed105 (0.37s)
+=== RUN   TestV4_KillAfterAck
+    kill_test.go:30: seed 424242
+    kill_test.go:65: 20 runs, 0 killed before the first transaction
+--- PASS: TestV4_KillAfterAck (4.90s)
+=== RUN   TestV9_KillDuringShrink
+    kill_test.go:73: seed 424242
+--- PASS: TestV9_KillDuringShrink (18.04s)
+=== RUN   TestV8_ShrinkWithConcurrentWrites
+    shrink_test.go:18: seed 424242
+--- PASS: TestV8_ShrinkWithConcurrentWrites (6.89s)
+=== RUN   TestV2_TruncationSweep_Always
+    truncate_test.go:71: seed 424242
+    truncate_test.go:76: file 81289 bytes, 11510 cut offsets
+    truncate_test.go:99: cut at 68: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 69: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 70: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 71: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 72: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 73: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 74: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 75: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 76: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 77: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 78: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 79: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 80: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 81: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 82: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 83: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 84: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 85: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 86: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 87: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 88: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 89: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 90: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 91: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 92: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: cut at 93: expected S_0, got a state that is no S_j (partial transaction): unexpected "k04"
+    truncate_test.go:99: stopping after 26 failures
+--- FAIL: TestV2_TruncationSweep_Always (1.25s)
+=== RUN   TestV2_TruncationSweep_OtherPolicies
+    truncate_test.go:142: policy 1, cut at 52: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 65: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 78: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 247: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 260: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 273: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 286: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 299: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 546: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 559: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 572: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 585: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 598: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 663: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 676: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 689: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 754: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 767: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 780: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 793: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 806: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 819: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 832: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 845: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 858: state is no S_j (partial transaction)
+    truncate_test.go:142: policy 1, cut at 871: state is no S_j (partial transaction)
+    truncate_test.go:142: stopping after 26 failures
+--- FAIL: TestV2_TruncationSweep_OtherPolicies (0.92s)
+=== RUN   TestV3_AppendAfterCut
+    truncate_test.go:166: 2718 cut offsets
+    truncate_test.go:202: cut at 400: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 405: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 410: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 415: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 420: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 425: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 430: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 435: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 440: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 445: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 450: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 455: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 460: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 465: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 470: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 475: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 480: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 485: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 490: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 495: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 500: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:213: cut at 500: fresh process state differs: unexpected "k09"
+    truncate_test.go:202: cut at 505: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 510: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 515: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: cut at 520: after appending 3 commits, reopen differs: unexpected "k09"
+    truncate_test.go:202: stopping after 26 failures
+--- FAIL: TestV3_AppendAfterCut (2.62s)
+FAIL
+FAIL	buntdbverify	741.089s
+FAIL
+== summary
+   --- PASS: TestV1_RoundTripAndRollback (0.41s)
+   --- PASS: TestV10_OneFileAndCommitCost (0.03s)
+   --- PASS: TestV11_NoNewDependencies (0.00s)
+   --- SKIP: TestChildMain (0.00s)
+   --- FAIL: TestV5_LastTransactionAltered (0.51s)
+   --- FAIL: TestV6_EarlierTransactionAltered (702.42s)
+   --- PASS: TestV7_OldFilesStillOpen (1.83s)
+   --- PASS: TestV4_KillAfterAck (4.90s)
+   --- PASS: TestV9_KillDuringShrink (18.04s)
+   --- PASS: TestV8_ShrinkWithConcurrentWrites (6.89s)
+   --- FAIL: TestV2_TruncationSweep_Always (1.25s)
+   --- FAIL: TestV2_TruncationSweep_OtherPolicies (0.92s)
+   --- FAIL: TestV3_AppendAfterCut (2.62s)
+   FAIL
+   FAIL	buntdbverify	741.089s
+   FAIL
+FAIL
+FAIL	github.com/tidwall/buntdb	19.114s
+FAIL
+results in <task>/verifier/_work/results

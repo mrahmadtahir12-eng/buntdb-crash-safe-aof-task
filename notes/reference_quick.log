@@ -1,0 +1,88 @@
+== clean tree from <task>/reference/buntdb
+buntdb.go
+go.mod
+go.sum
+== screen: branching on the test environment (a screen, not proof)
+(nothing found)
+== V11 surface: build the verifier (api_surface.go must compile)
+== V1b: upstream test suite from the pinned commit against the candidate sources
+--- FAIL: TestVariousTx (0.00s)
+    buntdb_test.go:666: expecting not found error
+FAIL
+FAIL	github.com/tidwall/buntdb	18.836s
+FAIL
+== V7 fixtures present?
+== harness, seed 424242
+=== RUN   TestV1_RoundTripAndRollback
+    basic_test.go:47: seed 424242
+--- PASS: TestV1_RoundTripAndRollback (0.42s)
+=== RUN   TestV10_OneFileAndCommitCost
+    basic_test.go:127: 500 small commits: tiny db 1.7558ms, big db 1.8807ms, ratio 1.1
+--- PASS: TestV10_OneFileAndCommitCost (0.04s)
+=== RUN   TestV11_NoNewDependencies
+--- PASS: TestV11_NoNewDependencies (0.00s)
+=== RUN   TestChildMain
+    child_test.go:18: not a child process
+--- SKIP: TestChildMain (0.00s)
+=== RUN   TestV5_LastTransactionAltered
+    corrupt_test.go:17: seed 424242
+    corrupt_test.go:26: last transaction occupies bytes 82045..82264
+    corrupt_test.go:84: 657 mutated files opened
+--- PASS: TestV5_LastTransactionAltered (20.37s)
+=== RUN   TestV6_EarlierTransactionAltered
+    corrupt_test.go:92: seed 424242
+    corrupt_test.go:107: 12385 offsets x 3 mutations
+--- PASS: TestV6_EarlierTransactionAltered (746.75s)
+=== RUN   TestV7_OldFilesStillOpen
+=== RUN   TestV7_OldFilesStillOpen/seed101
+=== RUN   TestV7_OldFilesStillOpen/seed102
+=== RUN   TestV7_OldFilesStillOpen/seed103
+=== RUN   TestV7_OldFilesStillOpen/seed104
+=== RUN   TestV7_OldFilesStillOpen/seed105
+--- PASS: TestV7_OldFilesStillOpen (2.23s)
+    --- PASS: TestV7_OldFilesStillOpen/seed101 (0.47s)
+    --- PASS: TestV7_OldFilesStillOpen/seed102 (0.47s)
+    --- PASS: TestV7_OldFilesStillOpen/seed103 (0.45s)
+    --- PASS: TestV7_OldFilesStillOpen/seed104 (0.42s)
+    --- PASS: TestV7_OldFilesStillOpen/seed105 (0.42s)
+=== RUN   TestV4_KillAfterAck
+    kill_test.go:30: seed 424242
+    kill_test.go:65: 20 runs, 0 killed before the first transaction
+--- PASS: TestV4_KillAfterAck (5.60s)
+=== RUN   TestV9_KillDuringShrink
+    kill_test.go:73: seed 424242
+--- PASS: TestV9_KillDuringShrink (18.65s)
+=== RUN   TestV8_ShrinkWithConcurrentWrites
+    shrink_test.go:18: seed 424242
+--- PASS: TestV8_ShrinkWithConcurrentWrites (6.97s)
+=== RUN   TestV2_TruncationSweep_Always
+    truncate_test.go:71: seed 424242
+    truncate_test.go:76: file 82264 bytes, 12460 cut offsets
+--- PASS: TestV2_TruncationSweep_Always (192.33s)
+=== RUN   TestV2_TruncationSweep_OtherPolicies
+--- PASS: TestV2_TruncationSweep_OtherPolicies (33.84s)
+=== RUN   TestV3_AppendAfterCut
+    truncate_test.go:166: 2968 cut offsets
+--- PASS: TestV3_AppendAfterCut (89.41s)
+PASS
+ok  	buntdbverify	1117.738s
+== summary
+   --- PASS: TestV1_RoundTripAndRollback (0.42s)
+   --- PASS: TestV10_OneFileAndCommitCost (0.04s)
+   --- PASS: TestV11_NoNewDependencies (0.00s)
+   --- SKIP: TestChildMain (0.00s)
+   --- PASS: TestV5_LastTransactionAltered (20.37s)
+   --- PASS: TestV6_EarlierTransactionAltered (746.75s)
+   --- PASS: TestV7_OldFilesStillOpen (2.23s)
+   --- PASS: TestV4_KillAfterAck (5.60s)
+   --- PASS: TestV9_KillDuringShrink (18.65s)
+   --- PASS: TestV8_ShrinkWithConcurrentWrites (6.97s)
+   --- PASS: TestV2_TruncationSweep_Always (192.33s)
+   --- PASS: TestV2_TruncationSweep_OtherPolicies (33.84s)
+   --- PASS: TestV3_AppendAfterCut (89.41s)
+   PASS
+   ok  	buntdbverify	1117.738s
+FAIL
+FAIL	github.com/tidwall/buntdb	18.836s
+FAIL
+results in <task>/verifier/_work/results
